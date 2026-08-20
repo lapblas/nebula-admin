@@ -1,0 +1,92 @@
+# 端口配置
+server:
+  port: 8081
+
+# Spring配置
+spring:
+  application:
+    name: nebula-admin
+  # 数据库配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/nebula?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: nebula
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # JPA配置
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+  # Redis配置
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 123456
+      database: 0
+      timeout: 3000ms
+
+# Sa-Token配置
+sa-token:
+  # token名称 (同时也是请求头名称)
+  token-name: Authorization
+  # token前缀
+  token-prefix: "Bearer"
+  # token有效期，单位秒，-1代表永不过期
+  timeout: 2592000
+  # token临时有效期 (指定时间内无操作就视为token过期)，单位秒
+  active-timeout: -1
+  # 是否允许同一账号并发登录 (为false时新登录挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token)
+  is-share: false
+  # token风格
+  token-style: uuid
+  # 是否输出操作日志
+  is-log: true
+  # 是否从cookie中读取token
+  is-read-cookie: false
+  # 是否从header中读取token
+  is-read-header: true
+  # 是否从url中读取token
+  is-read-url-query: false
+
+# 日志拦截器配置
+logging:
+  level:
+    com.nebula: INFO
+  interceptor:
+    # 统一开关，false 时所有日志都不打印
+    enabled: true
+    # 各部分开关
+    # 基础信息（请求方式、URI、响应状态、耗时等）
+    basic-info: true
+    # 客户端信息（IP、UserAgent、Session ID）
+    client-info: false
+    # 请求头
+    request-headers: false
+    # 请求参数（URL 参数）
+    request-params: true
+    # 请求体（Body）
+    request-body: true
+    # 响应体
+    response-body: true
+
+# RSA配置
+rsa:
+  enable: false
+  publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsQX4Zm2Xe9sFsgJS3qUGEjGxAZ7F0NfJBS3fxEI19zj0XPBwoOLg4J3q2s92BUb0NWC+ENW/PxXRxL2u77WozIFAZ8myUssnPKNVoJJ2dl5QyRseU05OahhLvWNIPEJNIVaDIb+Ra7fyABX0xRmezBFqF0rGLey6SRwUFzHY7C91ZixZJRPd2/opaz9AZtUv8kOCSncyUTbDhgvMyb4D8A9EyhIKaQyXEKgkyaQxeX90/KcmvuQ+h2VqKm2ZqGMRFkZClm+JBTHEaAegWMe3+ayONwmEt5Diu9eC49Pv1QETfVq4wxqP4aHMi8zaXCYacSjOz89YtrwswbzCK94o5QIDAQAB
+  privateKey: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCxBfhmbZd72wWyAlLepQYSMbEBnsXQ18kFLd/EQjX3OPRc8HCg4uDgneraz3YFRvQ1YL4Q1b8/FdHEva7vtajMgUBnybJSyyc8o1WgknZ2XlDJGx5TTk5qGEu9Y0g8Qk0hVoMhv5Frt/IAFfTFGZ7MEWoXSsYt7LpJHBQXMdjsL3VmLFklE93b+ilrP0Bm1S/yQ4JKdzJRNsOGC8zJvgPwD0TKEgppDJcQqCTJpDF5f3T8pya+5D6HZWoqbZmoYxEWRkKWb4kFMcRoB6BYx7f5rI43CYS3kOK714Lj0+/VARN9WrjDGo/hocyLzNpcJhpxKM7Pz1i2vCzBvMIr3ijlAgMBAAECggEAEgKpPeSXBbEoMG73lvLjvfyjxWYtupyFtXrwGgPhgTRgekc1Mk0682dlslrqp0lLhdXAqK5SjZzO8Y0Z7AYHtTzOPHEDLVTBenQkvVhBaLQaVIeni3K7XCR6KjvcaNMXDVYDs+6NYU/+9V7Gfzom05zO9i0zog8EefU7HwwBha/4GFPWpktl51OV6LpeHA8Ak4Vno1ap8I0bqmi2BxOQeFPNLCg0CvGQ3m3+dbNZSRFTu+Ta4aiiIAQ9GZllPLoTtrzaePfqGZqJM7Vqoj71ucxWJhgKgFoOFyBs4+zC3g1DofW/Ol+YwWKR2Qh1xf3+jqLDocRHCLfUbKh14Fu+8QKBgQDWtrHt4ZmXuJIcpPqlrlpYXT+4/BhHMdE8CgWfjDXV7tkeMXrFAQfNVLVGK9SdUi8f1cin3ZytHFg0l+G2N7Uv7+wODL6TOwnqLGoedCDEF0x1p39gOpnuTf2W5YvX69SWZZY7zki7sECUuzpKA9Y1fEJChIPqoLInLBAPd3Ut0QKBgQDTD/bao4cDWnQzu2u0fsn3a1HkcPE+3tEDiyzZ7KlcF0v1W48nG6Y7PGQFL2Ndz3btDFrVNTUvi/XVJKT8K67jvSkU+bWaZvhC4ocQDKelFK2sLYNX2n/SOQ8p6yfcNzkmyN97NuIBxFkjBUQG+VNC8vzdHJ70Jc4VbCzkvR7q1QKBgBhB06A4WI3XgEpUKS0GoZZSEpznfias7iKGT1RTFtHwhf7vQBt5nlQIOeKPmRmc604BbQXp94VnKl/muM1JReMAi/6aWf1wMhKOqf5+yCTfLPgt0Coi9LkDfp7JmB7wube0CmD/USBDLUigTlmGTXEFdMbnCbA8L2RVigr1R/vBAoGBAIUO92z20tMGX2ONsGTl2aWlfscpfK1KAzLctrXcQRjRhw1zX1gkUjPd6qBqM5aciDkBJPJszM7gyWZJ58kiMOtaAWA73IUujSx9avBvSfEEjEiTmM317cc2OZ0Ppt1p4xnUYS9odirvAdLWKwDKhfcbANbUiFEa1EUlIVhC8g7RAoGACPbO4rVcZNYh3mWaBW1BuuDwufVfY+88npHiq46xMRiJxW+Eqlhy9qnVUQKBHHuqvfLRxjCll9E5XgGsviNG79Vmjfep8fp3Nu90bct7UAujMZkYTj7aKRzwM7hX+oSf63M+/NCRTcy93023G1CuLvvKaMgumi/7uKH4iAYpyG0=
+
+# 管理员初始化配置
+admin:
+  init:
+    enable: true
+    username: admin
+    password: admin123
+    phone: "13800000000"

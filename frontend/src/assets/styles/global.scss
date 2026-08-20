@@ -1,0 +1,284 @@
+// ─── 设计系统：扁平化 · Apple / Xiaomi 风格 ───
+// 主色调
+$primary: #0071e3;
+$primary-hover: #0077ed;
+$primary-light: #e8f4fd;
+
+// 中性色
+$bg-page: #f5f5f7;
+$bg-card: #ffffff;
+$bg-sidebar: #fbfbfd;
+$text-primary: #1d1d1f;
+$text-secondary: #86868b;
+$text-tertiary: #aeaeb2;
+$border: #e5e5ea;
+$divider: #f2f2f7;
+
+// 阴影
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.08);
+
+// 圆角
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 20px;
+
+// 过渡
+$transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+// ─── 重置 ───
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #app {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $text-primary;
+  background: $bg-page;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// ─── Element Plus 扁平化覆盖 ───
+
+// 按钮
+.el-button {
+  border-radius: $radius-sm !important;
+  font-weight: 500 !important;
+  border: none !important;
+  letter-spacing: 0.02em;
+  transition: $transition;
+
+  &.el-button--primary {
+    background: $primary !important;
+    &:hover, &:focus {
+      background: $primary-hover !important;
+    }
+  }
+
+  &.el-button--default {
+    background: $bg-page !important;
+    color: $text-primary !important;
+    &:hover {
+      background: $border !important;
+    }
+  }
+
+  &.el-button--danger {
+    background: #ff3b30 !important;
+    &:hover {
+      background: #ff453a !important;
+    }
+  }
+}
+
+// 卡片
+.el-card {
+  border: none !important;
+  border-radius: $radius-md !important;
+  box-shadow: $shadow-sm !important;
+  overflow: hidden;
+  transition: $transition;
+
+  &:hover {
+    box-shadow: $shadow-md !important;
+  }
+
+  .el-card__header {
+    border-bottom: 1px solid $divider !important;
+    padding: 16px 24px !important;
+    font-weight: 600;
+    font-size: 15px;
+    color: $text-primary;
+  }
+
+  .el-card__body {
+    padding: 20px 24px !important;
+  }
+}
+
+// 表格
+.el-table {
+  --el-table-border-color: #{$divider};
+  --el-table-header-bg-color: #{$bg-page};
+  --el-table-row-hover-bg-color: #f9f9fb;
+
+  th.el-table__cell {
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    color: $text-secondary !important;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: $bg-page !important;
+    border-bottom: 1px solid $divider !important;
+  }
+
+  td.el-table__cell {
+    border-bottom: 1px solid $divider !important;
+    font-size: 14px;
+  }
+
+  &.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
+    background: #fafafa !important;
+  }
+
+  &::before, &::after {
+    display: none !important;
+  }
+}
+
+// 输入框
+.el-input__wrapper {
+  border-radius: $radius-sm !important;
+  box-shadow: 0 0 0 1px $border !important;
+  transition: $transition;
+
+  &:hover {
+    box-shadow: 0 0 0 1px $text-tertiary !important;
+  }
+
+  &.is-focus {
+    box-shadow: 0 0 0 2px $primary !important;
+  }
+}
+
+// 对话框：精致玻璃卡片
+.el-overlay {
+  background-color: rgba(31, 45, 61, 0.42) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.el-dialog {
+  border-radius: 20px !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: 0 24px 64px rgba(31, 45, 61, 0.16), 0 2px 8px rgba(31, 45, 61, 0.06) !important;
+  overflow: hidden;
+
+  .el-dialog__header {
+    padding: 20px 24px 14px !important;
+    border-bottom: none !important;
+
+    .el-dialog__title {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      color: #1d1d1f;
+
+      &::before {
+        content: '';
+        width: 4px;
+        height: 18px;
+        border-radius: 3px;
+        background: linear-gradient(180deg, #0071e3, #40a9ff);
+      }
+    }
+  }
+
+  .el-dialog__body {
+    padding: 20px 24px !important;
+  }
+
+  .el-dialog__footer {
+    padding: 14px 24px 18px !important;
+    background: rgba(245, 245, 247, 0.55);
+    border-top: 1px solid #f2f2f7;
+    border-radius: 0 0 20px 20px;
+  }
+}
+
+// Tab
+.el-tabs__nav-wrap::after {
+  display: none !important;
+}
+
+.el-tabs__item {
+  font-weight: 500;
+  color: $text-secondary;
+  &.is-active {
+    color: $primary;
+  }
+}
+
+.el-tabs__active-bar {
+  background-color: $primary;
+  border-radius: 2px;
+}
+
+// Tag
+.el-tag {
+  border: none !important;
+  border-radius: 6px !important;
+  font-weight: 500;
+}
+
+// Message Box
+.el-message-box {
+  border-radius: 20px !important;
+  border: none !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: 0 24px 64px rgba(31, 45, 61, 0.16), 0 2px 8px rgba(31, 45, 61, 0.06) !important;
+
+  .el-message-box__title {
+    font-weight: 700;
+    font-size: 17px;
+    color: #1d1d1f;
+  }
+
+  .el-message-box__content {
+    color: #86868b;
+    line-height: 1.6;
+  }
+
+  .el-message-box__btns {
+    padding-top: 18px;
+  }
+}
+
+// Dropdown
+.el-dropdown-menu {
+  border: none !important;
+  border-radius: $radius-md !important;
+  box-shadow: $shadow-lg !important;
+  padding: 6px !important;
+}
+
+.el-dropdown-menu__item {
+  border-radius: $radius-sm !important;
+  padding: 8px 14px !important;
+}
+
+// Switch
+.el-switch.is-checked .el-switch__core {
+  background-color: $primary !important;
+  border-color: $primary !important;
+}
+
+// Pagination
+.el-pagination {
+  --el-pagination-button-bg-color: transparent;
+
+  .el-pager li {
+    border-radius: $radius-sm !important;
+    min-width: 32px;
+    font-weight: 500;
+  }
+}
